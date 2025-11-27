@@ -7,10 +7,13 @@ public class DestroyZone : MonoBehaviour
 {
     public GameObject Player;
     PlayerFire pf;
+    public GameObject Follow;
+    FollowFire ff;
 
     void Start()
     {
         pf = Player.GetComponent<PlayerFire>();
+        ff = Follow.GetComponent<FollowFire>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,6 +53,9 @@ public class DestroyZone : MonoBehaviour
 
             //이놈아가 제일 최적화 잘된 코드임
             pf.ReloadPool(other.gameObject);
+
+            ff.brokenBullet();
+
         }
     }
 
