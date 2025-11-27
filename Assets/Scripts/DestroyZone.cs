@@ -7,13 +7,10 @@ public class DestroyZone : MonoBehaviour
 {
     public GameObject Player;
     PlayerFire pf;
-    public GameObject Follow;
-    FollowFire ff;
 
     void Start()
     {
         pf = Player.GetComponent<PlayerFire>();
-        ff = Follow.GetComponent<FollowFire>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -53,9 +50,12 @@ public class DestroyZone : MonoBehaviour
 
             //이놈아가 제일 최적화 잘된 코드임
             pf.ReloadPool(other.gameObject);
+        }
 
-            ff.brokenBullet();
-
+        // 충돌한 오브젝트의 레이어가 "Enemy"인 경우
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            Destroy(other.gameObject);
         }
     }
 
